@@ -1,0 +1,2 @@
+# ninjasbot
+new repo
