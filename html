@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub Stats Resume</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        h1 { text-align: center; }
+        #resume { width: 80%; margin: auto; }
+    </style>
+</head>
+<body>
+    <div id="resume">
+        <h1>My GitHub Stats Resume</h1>
+        <p>Total Repositories: <span id="repo-count"></span></p>
+        <h2>Top Repositories:</h2>
+        <ul id="top-repos"></ul>
+    </div>
+    <script>
+        async function fetchGitHubData() {
+            const response = await fetch('/api/github-stats');
+            const data = await response.json();
+            document.getElementById('repo-count').textContent = data.repoCount;
+            const topReposList = document.getElementById('top-repos');
+            data.topRepos.forEach(repo => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${repo.name} (${repo.stars} stars)`;
+                topReposList.appendChild(listItem);
+            });
+        }
+        fetchGitHubData();
+    </script>
+</body>
+</html>
